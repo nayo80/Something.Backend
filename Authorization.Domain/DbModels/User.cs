@@ -14,6 +14,5 @@ public record User : BaseEntity
     public int RoleId { get; set; }
     public DateTime CreateDate { get; set; } = DateTime.UtcNow;
     public DateTime? UpdateDate { get; set; }
-    public List<int>TagIds { get; init; } = new List<int>();
 
 }

@@ -28,7 +28,7 @@ public class TokenService
 
     public string GenerateJwtToken(User userAndRestaurant)
     {
-        var claims = new List<Claim>();
+        List<Claim> claims;
 
 
         claims = new List<Claim>
@@ -40,9 +40,6 @@ public class TokenService
             new("Email", userAndRestaurant.Email),
             new("PhoneNumber", userAndRestaurant.PhoneNumber ?? string.Empty)
         };
-
-
-        // claims.AddRange(user.Roles.Select(role => new Claim("roles", role.Id.ToString())));
 
         var token = new JwtSecurityToken(
             _issuer,

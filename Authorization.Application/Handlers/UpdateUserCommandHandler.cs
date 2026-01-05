@@ -24,7 +24,6 @@ public class UpdateUserCommandHandler(
             LastName = request.User.LastName,
             Email = request.User.Email,
             PhoneNumber = request.User.PhoneNumber,
-            TagIds = request.User.TagIds,
         };
 
         var mappedUser = mapper.Map<User>(updatedUser);

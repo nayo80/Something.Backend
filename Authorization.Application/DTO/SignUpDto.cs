@@ -26,7 +26,6 @@ public partial record SignUpDto
     public string ConfirmPassword { get; set; } = string.Empty;
     [Required(ErrorMessage = "Role is required")]
     public int RoleId { get; set; }
-    public List<int>TagIds { get; init; } = new List<int>();
 
     public bool IsValidPassword()
     {

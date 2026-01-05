@@ -56,7 +56,6 @@ public class AuthRepository(IDbConnection connection) : IAuthRepository
 
     public async Task SignUpUser(User user)
     {
-        DataTable tags = CreateTagTable(user.TagIds);
         await connection.ExecuteAsync("[dbo].[SignUpUser]", new
         {
             user.Password,
@@ -64,8 +63,7 @@ public class AuthRepository(IDbConnection connection) : IAuthRepository
             user.LastName,
             user.Email,
             user.PhoneNumber,
-            user.RoleId,
-            TagIds = tags
+            user.RoleId
         }, commandType: CommandType.StoredProcedure);
     }
 
@@ -80,15 +78,13 @@ public class AuthRepository(IDbConnection connection) : IAuthRepository
 
     public async Task UpdateUser(User user)
     {
-        DataTable tags = CreateTagTable(user.TagIds);
         await connection.ExecuteAsync("[dbo].[UpdateUser]", new
         {
             user.Id,
             user.FirstName,
             user.LastName,
             user.Email,
-            user.PhoneNumber,
-            TagIds = tags
+            user.PhoneNumber
         }, commandType: CommandType.StoredProcedure);
     }
 
