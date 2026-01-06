@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 
 namespace Authorization.Application.DTO;
 
-public partial class UpdateUserDto
+public class UpdateUserDto
 {
-    public int Id { get; set; } 
+    public int Id { get; init; } 
 
     [Required(ErrorMessage = "First name is required.")]
     [StringLength(50, ErrorMessage = "First name cannot exceed 50 characters.")]
@@ -21,10 +20,6 @@ public partial class UpdateUserDto
     [RegularExpression(@"^(\+9955\d{8}|5\d{8})$", ErrorMessage = "PhoneNumber must be a valid Georgian mobile number.")]
     public string PhoneNumber { get; init; } = string.Empty;
 
-
-
-    public List<int>TagIds { get; init; } =  new List<int>();
-
-    [GeneratedRegex(@"^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*\(\)\-_=\+\[\]\{\};:'"",<>\./?\\|`]).+$")]
-    private static partial Regex PasswordRegex();
+    // [GeneratedRegex(@"^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*\(\)\-_=\+\[\]\{\};:'"",<>\./?\\|`]).+$")]
+    // private static partial Regex PasswordRegex();
 }

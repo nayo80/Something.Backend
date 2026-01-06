@@ -27,11 +27,11 @@ public partial record SignUpDto
     [Required(ErrorMessage = "Role is required")]
     public int RoleId { get; set; }
 
-    public bool IsValidPassword()
-    {
-        return PasswordRegex().IsMatch(Password);
-    }
-
-    [GeneratedRegex(@"^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*\(\)\-_=\+\[\]\{\};:'"",<>\./?\\|`]).+$")]
-    private static partial Regex PasswordRegex();
+    // public bool IsValidPassword()
+    // {
+    //     return PasswordRegex().IsMatch(Password);
+    // }
+    //
+    // [GeneratedRegex(@"^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*\(\)\-_=\+\[\]\{\};:'"",<>\./?\\|`]).+$")]
+    // private static partial Regex PasswordRegex();
 }
