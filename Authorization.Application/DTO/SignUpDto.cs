@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 
 namespace Authorization.Application.DTO;
 
-public partial record SignUpDto
+public record SignUpDto
 {
     [Required(ErrorMessage = "FirstName is required.")]
     [StringLength(50, ErrorMessage = "First name cannot exceed 50 characters.")]
