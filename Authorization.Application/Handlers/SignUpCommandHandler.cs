@@ -2,7 +2,6 @@
 using Authorization.Infrastructure;
 using MapsterMapper;
 using MediatR;
-using Shared.Exceptions;
 
 namespace Authorization.Application.Handlers;
 

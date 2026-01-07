@@ -9,13 +9,18 @@ namespace Authorization.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController(IMediator mediator) : ControllerBase
+public class AuthController(IMediator mediator,ILogger<AuthController>logger) : ControllerBase
 {
     [HttpGet(template: "signin")]
     public async Task<IActionResult> SignIn(string email, string password)
     {
         var token = await mediator.Send(request: new SignInQuery(Email: email, Password: password));
-
+        var date = DateTime.UtcNow;
+        // if (!string.IsNullOrEmpty(token.Token))
+        // {
+        //     logger.LogInformation($"User {email} successfully logged in at {date}.");
+        // }
+        
         return new JsonResult(value: token);
     }
 

@@ -16,6 +16,7 @@ public enum ErrorMessages
     AuthPermitUserIsDeleted,
     ExpressionOfInterestFailed,
     ConfirmationFailed,
+    AuthorizationFailedCheckCredentials,
     #endregion
     
     #region RestaurantNotFound
