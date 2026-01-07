@@ -25,7 +25,6 @@ public partial class LoggingVersionMiddleware
     {
         _next = next;
         _logger = logger;
-        _handler = new JwtSecurityTokenHandler();
 
         var keyString = configuration["Jwt:Key"] ?? "";
 
