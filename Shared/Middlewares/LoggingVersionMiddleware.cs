@@ -23,7 +23,6 @@ public partial class LoggingVersionMiddleware
     public LoggingVersionMiddleware(RequestDelegate next,IConfiguration configuration,
         ILogger<LoggingVersionMiddleware> logger)
     {
-        _next = next;
         _logger = logger;
         _handler = new JwtSecurityTokenHandler();
 
