@@ -10,13 +10,13 @@ public class AuthRepository(IDbConnection connection) : IAuthRepository
 {
     public async Task<User> GetUser(string email)
     {
-        var user = await connection.QuerySingleAsync<User>("[dbo].[GetUser]", new
+        var user = await connection.QuerySingleOrDefaultAsync<User>("[dbo].[GetUser]", new
         {
             Email = email
         }, commandType: CommandType.StoredProcedure);
 
 
-        if (user == null) throw new UserFriendlyException(ErrorMessages.AuthNotPermitted);
+        if (user == null) throw new UserFriendlyException(ErrorMessages.AuthorizationFailedCheckCredentials);
 
         return user;
     }
