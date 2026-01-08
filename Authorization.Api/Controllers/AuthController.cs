@@ -9,7 +9,7 @@ namespace Authorization.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController(IMediator mediator,ILogger<AuthController>logger) : ControllerBase
+public class AuthController(IMediator mediator) : ControllerBase
 {
     [HttpGet(template: "signin")]
     public async Task<IActionResult> SignIn(string email, string password)
