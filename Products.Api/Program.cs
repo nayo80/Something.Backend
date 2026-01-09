@@ -1,11 +1,19 @@
 using System.Data;
-using System.Net;
 using System.Text;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Mapster;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Products.Application.Commands.Car;
+using Products.Application.Dtos.Cars;
+using Products.Application.Validators.Car;
+using Products.Infrastructure.Implementations.Cars;
+using Products.Infrastructure.Interfaces.Cars;
+using Shared.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
 #region Swagger
 
 builder.Services.AddSwaggerGen(options =>
@@ -41,6 +50,7 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+
 #endregion
 
 builder.Services.AddScoped<IDbConnection>(_ =>
@@ -48,10 +58,10 @@ builder.Services.AddScoped<IDbConnection>(_ =>
 
 #region Authentication & Authorization
 
-var keyString = builder.Configuration["Jwt:Key"]
-                ?? "biUULD2I21BaOLdq3TOdifhjyWcIYpWKScEruuvkA5HtRw3Lrk7W2xShdsasdudtem";
+var keyString = builder.Configuration["Jwt:Key"];
+// ?? "biUULD2I21BaOLdq3TOdifhjyWcIYpWKScEruuvkA5HtRw3Lrk7W2xShdsasdudtem";
 
-var key = Encoding.ASCII.GetBytes(keyString);
+var key = Encoding.ASCII.GetBytes(keyString!);
 
 builder.Services.AddAuthentication(options =>
     {
@@ -79,6 +89,22 @@ builder.Services.AddAuthorization();
 
 #endregion
 
+#region Services
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<CarValidator>();
+builder.Services.AddMapster();
+builder.Services.AddScoped<ICarRepository, CarRepository>();
+
+#endregion
+
+#region Mediatr
+
+builder.Services.AddMediatR(m => m.RegisterServicesFromAssemblies(
+    typeof(CreateCarCommand).Assembly
+));
+
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -88,10 +114,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
