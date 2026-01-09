@@ -34,6 +34,11 @@ public enum ErrorMessages
     
     #endregion
 
+    #region Car
+
+    CarNotFound,
+
+    #endregion
 
     #region Password Errors
 
