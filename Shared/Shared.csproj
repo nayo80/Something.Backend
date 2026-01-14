@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <PackageReference Include="Dapper" Version="2.1.66" />
+      <PackageReference Include="Elastic.Clients.Elasticsearch" Version="8.9.0" />
       <PackageReference Include="Elastic.Serilog.Sinks" Version="8.6.0" />
       <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
       <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.1" />

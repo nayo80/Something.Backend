@@ -1,6 +1,6 @@
-﻿namespace Products.Infrastructure.Interfaces.Elastic;
+﻿namespace Shared.ElasticServices;
 
-public interface IElasticSearchService
+public interface IElasticServices
 {
     Task<T?> GetProductAsync<T>(int id) where T : class;
     Task IndexProductAsync<T>(T product);

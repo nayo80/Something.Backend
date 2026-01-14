@@ -2,11 +2,11 @@
 using Elastic.Transport;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Products.Infrastructure.Interfaces.Elastic;
 
-namespace Products.Infrastructure.Implementations.Elastic;
 
-public class ElasticSearchService : IElasticSearchService
+namespace Shared.ElasticServices;
+
+public class ElasticSearchService : IElasticServices
 {
     private readonly ElasticsearchClient _client;
     private readonly string _defaultIndex;

@@ -11,10 +11,9 @@ using Microsoft.OpenApi.Models;
 using Products.Application.Commands.Car;
 using Products.Application.Validators.Car;
 using Products.Infrastructure.Implementations.Cars;
-using Products.Infrastructure.Implementations.Elastic;
 using Products.Infrastructure.Interfaces.Cars;
-using Products.Infrastructure.Interfaces.Elastic;
 using Serilog;
+using Shared.ElasticServices;
 using Shared.Helpers.ElasticSearchLogs;
 using Shared.Middlewares;
 
@@ -105,7 +104,7 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CarValidator>();
 builder.Services.AddMapster();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
-builder.Services.AddSingleton<IElasticSearchService,ElasticSearchService>();
+builder.Services.AddSingleton<IElasticServices,ElasticSearchService>();
 
 #endregion
 

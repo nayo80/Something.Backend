@@ -10,8 +10,4 @@
       <ProjectReference Include="..\Products.Domain\Products.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Elastic.Clients.Elasticsearch" Version="8.9.0" />
-    </ItemGroup>
-
 </Project>

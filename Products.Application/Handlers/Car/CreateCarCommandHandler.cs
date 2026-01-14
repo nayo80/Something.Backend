@@ -3,13 +3,13 @@ using MediatR;
 using Products.Application.Commands.Car;
 using Products.Domain.Entities.Products.Cars;
 using Products.Infrastructure.Interfaces.Cars;
-using Products.Infrastructure.Interfaces.Elastic;
+using Shared.ElasticServices;
 using Shared.Guards;
 using Shared.Responses;
 
 namespace Products.Application.Handlers.Car;
 
-public class CreateCarCommandHandler(ICarRepository repository,IMapper mapper,IElasticSearchService productSearchService) : IRequestHandler<CreateCarCommand,BaseResponse<int>>
+public class CreateCarCommandHandler(ICarRepository repository,IMapper mapper,IElasticServices elasticServices) : IRequestHandler<CreateCarCommand,BaseResponse<int>>
 {
     public async Task<BaseResponse<int>> Handle(CreateCarCommand request, CancellationToken cancellationToken)
     {
@@ -18,7 +18,7 @@ public class CreateCarCommandHandler(ICarRepository repository,IMapper mapper,IE
         int resultFromServer = await repository.CreateAsync(mappedCar);
         Guards.GreaterThanZero(resultFromServer,"Car Model cannot be created");
         mappedCar.Id = resultFromServer;
-        await productSearchService.IndexProductAsync(mappedCar);
+        await elasticServices.IndexProductAsync(mappedCar);
         return new BaseResponse<int>
         {
             Result = resultFromServer
