@@ -49,6 +49,7 @@ public class ElasticSearchService : IElasticServices
 
         if (response.Found)
         {
+            _logger.LogWarning("Product with ID {Id} successfully found in Elasticsearch", id);
             return response.Source;
         }
 

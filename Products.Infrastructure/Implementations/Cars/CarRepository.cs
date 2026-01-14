@@ -39,7 +39,7 @@ public class CarRepository(IDbConnection connection) : ICarRepository
 
     public async Task<CarModel?> ReadAsync(int id)
     {
-        var carModel = await connection.QuerySingleAsync<CarModel?>("dbo.SingleCar", new {id},
+        var carModel = await connection.QuerySingleOrDefaultAsync<CarModel?>("dbo.SingleCar", new {id},
             commandType: CommandType.StoredProcedure);
         if (carModel == null) throw new UserFriendlyException(ErrorMessages.CarNotFound);
         return carModel;
