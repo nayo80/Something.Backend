@@ -4,4 +4,4 @@ using Shared.Responses;
 
 namespace Products.Application.Commands.Car;
 
-public record CreateCarCommand(RequestCarDto? CarDto) : IRequest<BaseResponse<bool>>;
+public record CreateCarCommand(RequestCarDto? CarDto) : IRequest<BaseResponse<int>>;

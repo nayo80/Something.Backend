@@ -8,9 +8,9 @@ namespace Products.Infrastructure.Implementations.Cars;
 
 public class CarRepository(IDbConnection connection) : ICarRepository
 {
-    public async Task<bool> CreateAsync(CarModel carModel)
+    public async Task<int> CreateAsync(CarModel carModel)
     {
-        return await connection.ExecuteScalarAsync<bool>("dbo.CreateCar", new
+        return await connection.ExecuteScalarAsync<int>("dbo.CreateCar", new
         {
             carModel.Brand,
             carModel.Model,

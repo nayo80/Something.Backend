@@ -12,7 +12,7 @@ namespace Products.Api.Controllers;
 public class CarController(IMediator mediator) : ControllerBase
 {
     [HttpPost]
-    public async Task<BaseResponse<bool>> CreateCar([FromBody] RequestCarDto carDto)
+    public async Task<BaseResponse<int>> CreateCar([FromBody] RequestCarDto carDto)
     {
         return await mediator.Send(new CreateCarCommand(carDto));
     }

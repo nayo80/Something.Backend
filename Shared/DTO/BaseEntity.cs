@@ -1,7 +1,7 @@
 ﻿namespace Shared.Dto;
 
-public abstract record BaseEntity
+public record BaseEntity
 {
-    public int Id { get; init; }
+    public int Id { get; set; }
     public bool IsDeleted { get; set; }
 }

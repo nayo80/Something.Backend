@@ -9,10 +9,13 @@ using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Products.Application.Commands.Car;
-using Products.Application.Dtos.Cars;
 using Products.Application.Validators.Car;
 using Products.Infrastructure.Implementations.Cars;
+using Products.Infrastructure.Implementations.Elastic;
 using Products.Infrastructure.Interfaces.Cars;
+using Products.Infrastructure.Interfaces.Elastic;
+using Serilog;
+using Shared.Helpers.ElasticSearchLogs;
 using Shared.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -53,6 +56,13 @@ builder.Services.AddSwaggerGen(options =>
 
 #endregion
 
+#region ElasticLogs
+
+builder.Services.AddElasticSerilog(builder.Configuration);
+builder.Host.UseSerilog();
+
+#endregion
+
 builder.Services.AddScoped<IDbConnection>(_ =>
     new SqlConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -90,10 +100,12 @@ builder.Services.AddAuthorization();
 #endregion
 
 #region Services
+
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CarValidator>();
 builder.Services.AddMapster();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
+builder.Services.AddSingleton<IElasticSearchService,ElasticSearchService>();
 
 #endregion
 
