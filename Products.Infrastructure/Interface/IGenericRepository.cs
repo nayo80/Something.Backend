@@ -1,6 +1,6 @@
 ﻿using Products.Domain.Entities.Products.Cars;
 
-namespace Products.Infrastructure.Interfaces.Cars;
+namespace Products.Infrastructure.Interface;
 
 public interface IGenericRepository<T>
 {

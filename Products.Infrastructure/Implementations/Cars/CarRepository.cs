@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using Dapper;
 using Products.Domain.Entities.Products.Cars;
-using Products.Infrastructure.Interfaces.Cars;
+using Products.Infrastructure.Interface;
 using Shared.Exceptions;
 
 namespace Products.Infrastructure.Implementations.Cars;

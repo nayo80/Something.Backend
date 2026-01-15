@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Products.Application.Queries.Cars;
 using Products.Domain.Entities.Products.Cars;
-using Products.Infrastructure.Interfaces.Cars;
+using Products.Infrastructure.Interface;
 using Services.ElasticSearch;
 using Shared.Guards;
 using Shared.Responses;

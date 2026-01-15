@@ -12,7 +12,7 @@ using Products.Application.Commands.Car;
 using Products.Application.Validators.Car;
 using Products.Domain.Entities.Products.Cars;
 using Products.Infrastructure.Implementations.Cars;
-using Products.Infrastructure.Interfaces.Cars;
+using Products.Infrastructure.Interface;
 using Serilog;
 using Services.ElasticSearch;
 using Shared.Helpers.ElasticSearchLogs;
