@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Products.Domain.Entities.Products.Cars;
+using Products.Domain.Entities.Cars;
 using Shared.Responses;
 
 namespace Products.Application.Queries.Cars;

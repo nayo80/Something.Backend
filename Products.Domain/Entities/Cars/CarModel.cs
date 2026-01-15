@@ -1,6 +1,6 @@
 ﻿using Shared.DTO;
 
-namespace Products.Domain.Entities.Products.Cars;
+namespace Products.Domain.Entities.Cars;
 
 public class CarModel : BaseModel
 {

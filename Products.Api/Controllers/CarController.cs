@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Products.Application.Commands.Car;
 using Products.Application.Dtos.Cars;
 using Products.Application.Queries.Cars;
-using Products.Domain.Entities.Products.Cars;
+using Products.Domain.Entities.Cars;
 using Shared.Responses;
 
 namespace Products.Api.Controllers;

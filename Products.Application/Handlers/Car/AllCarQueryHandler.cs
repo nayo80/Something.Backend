@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Products.Application.Queries.Cars;
-using Products.Domain.Entities.Products.Cars;
+using Products.Domain.Entities.Cars;
 using Products.Infrastructure.Interface;
 using Shared.Guards;
 using Shared.Responses;

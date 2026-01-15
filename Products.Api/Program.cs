@@ -10,8 +10,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Products.Application.Commands.Car;
 using Products.Application.Validators.Car;
-using Products.Domain.Entities.Products.Cars;
+using Products.Domain.Entities.Cars;
+using Products.Domain.Entities.FootballPlayers;
 using Products.Infrastructure.Implementations.Cars;
+using Products.Infrastructure.Implementations.FootballPlayers;
 using Products.Infrastructure.Interface;
 using Serilog;
 using Services.ElasticSearch;
@@ -105,6 +107,7 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CarValidator>();
 builder.Services.AddMapster();
 builder.Services.AddScoped<IGenericRepository<CarModel>, CarRepository>();
+builder.Services.AddScoped<IGenericRepository<FootballPlayerModel>, FootballPlayerRepository>();
 builder.Services.AddSingleton<IElasticEngineService,ElasticEngineService>();
 
 #endregion

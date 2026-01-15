@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using Dapper;
-using Products.Domain.Entities.Products.Cars;
+using Products.Domain.Entities.Cars;
 using Products.Infrastructure.Interface;
 using Shared.Exceptions;
 
@@ -30,10 +30,6 @@ public class CarRepository(IDbConnection connection) : IGenericRepository<CarMod
     }
 
 
-    public Task<int> CreateAsync<T>(T carModel)
-    {
-        throw new NotImplementedException();
-    }
 
     public async Task<bool> DeleteAsync(int? id)
     {
