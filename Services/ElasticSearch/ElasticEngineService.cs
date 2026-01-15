@@ -3,16 +3,15 @@ using Elastic.Transport;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
+namespace Services.ElasticSearch;
 
-namespace Shared.ElasticServices;
-
-public class ElasticSearchService : IElasticServices
+public class ElasticEngineService : IElasticEngineService
 {
     private readonly ElasticsearchClient _client;
     private readonly string _defaultIndex;
-    private readonly ILogger<ElasticSearchService> _logger;
+    private readonly ILogger<ElasticEngineService> _logger;
 
-    public ElasticSearchService(IConfiguration configuration, ILogger<ElasticSearchService> logger)
+    public ElasticEngineService(IConfiguration configuration, ILogger<ElasticEngineService> logger)
     {
         _logger = logger;
         var settingsSection = configuration.GetSection("ElasticSettings");
@@ -74,7 +73,7 @@ public class ElasticSearchService : IElasticServices
         }
     }
 
-    public async Task DeleteProductAsync(int? id)
+    public async Task DeleteProductAsync(int id)
     {
         var response = await _client.DeleteAsync<object>(id, d => d.Index(_defaultIndex));
 

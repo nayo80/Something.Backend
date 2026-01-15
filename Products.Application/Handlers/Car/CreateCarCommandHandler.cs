@@ -3,13 +3,13 @@ using MediatR;
 using Products.Application.Commands.Car;
 using Products.Domain.Entities.Products.Cars;
 using Products.Infrastructure.Interfaces.Cars;
-using Shared.ElasticServices;
+using Services.ElasticSearch;
 using Shared.Guards;
 using Shared.Responses;
 
 namespace Products.Application.Handlers.Car;
 
-public class CreateCarCommandHandler(ICarRepository repository,IMapper mapper,IElasticServices elasticServices) : IRequestHandler<CreateCarCommand,BaseResponse<int>>
+public class CreateCarCommandHandler(ICarRepository repository,IMapper mapper,IElasticEngineService elasticServices) : IRequestHandler<CreateCarCommand,BaseResponse<int>>
 {
     public async Task<BaseResponse<int>> Handle(CreateCarCommand request, CancellationToken cancellationToken)
     {

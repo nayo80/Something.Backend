@@ -1,13 +1,13 @@
 ﻿using MediatR;
 using Products.Application.Commands.Car;
 using Products.Infrastructure.Interfaces.Cars;
-using Shared.ElasticServices;
+using Services.ElasticSearch;
 using Shared.Guards;
 using Shared.Responses;
 
 namespace Products.Application.Handlers.Car;
 
-public class DeleteCarCommandHandler(ICarRepository repository,IElasticServices elasticServices) : IRequestHandler<DeleteCarCommand,BaseResponse<bool>>
+public class DeleteCarCommandHandler(ICarRepository repository,IElasticEngineService elasticServices) : IRequestHandler<DeleteCarCommand,BaseResponse<bool>>
 {
     public async Task<BaseResponse<bool>> Handle(DeleteCarCommand request, CancellationToken cancellationToken)
     {

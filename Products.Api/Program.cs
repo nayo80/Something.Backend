@@ -13,7 +13,7 @@ using Products.Application.Validators.Car;
 using Products.Infrastructure.Implementations.Cars;
 using Products.Infrastructure.Interfaces.Cars;
 using Serilog;
-using Shared.ElasticServices;
+using Services.ElasticSearch;
 using Shared.Helpers.ElasticSearchLogs;
 using Shared.Middlewares;
 
@@ -104,7 +104,7 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CarValidator>();
 builder.Services.AddMapster();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
-builder.Services.AddSingleton<IElasticServices,ElasticSearchService>();
+builder.Services.AddSingleton<IElasticEngineService,ElasticEngineService>();
 
 #endregion
 

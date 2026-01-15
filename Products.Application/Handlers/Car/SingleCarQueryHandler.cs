@@ -2,13 +2,13 @@
 using Products.Application.Queries.Cars;
 using Products.Domain.Entities.Products.Cars;
 using Products.Infrastructure.Interfaces.Cars;
-using Shared.ElasticServices;
+using Services.ElasticSearch;
 using Shared.Guards;
 using Shared.Responses;
 
 namespace Products.Application.Handlers.Car;
 
-public class SingleCarQueryHandler(ICarRepository repository,IElasticServices elasticServices) : IRequestHandler<SingleCarQuery,BaseResponse<CarModel>>
+public class SingleCarQueryHandler(ICarRepository repository,IElasticEngineService elasticServices) : IRequestHandler<SingleCarQuery,BaseResponse<CarModel>>
 {
     public async Task<BaseResponse<CarModel>> Handle(SingleCarQuery request, CancellationToken cancellationToken)
     {

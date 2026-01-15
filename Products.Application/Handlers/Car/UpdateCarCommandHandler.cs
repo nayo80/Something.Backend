@@ -3,13 +3,13 @@ using MediatR;
 using Products.Application.Commands.Car;
 using Products.Domain.Entities.Products.Cars;
 using Products.Infrastructure.Interfaces.Cars;
-using Shared.ElasticServices;
+using Services.ElasticSearch;
 using Shared.Guards;
 using Shared.Responses;
 
 namespace Products.Application.Handlers.Car;
 
-public class UpdateCarCommandHandler(ICarRepository repository,IMapper mapper,IElasticServices elasticServices) : IRequestHandler<UpdateCarCommand,BaseResponse<bool>>
+public class UpdateCarCommandHandler(ICarRepository repository,IMapper mapper,IElasticEngineService elasticServices) : IRequestHandler<UpdateCarCommand,BaseResponse<bool>>
 {
     public async Task<BaseResponse<bool>> Handle(UpdateCarCommand request, CancellationToken cancellationToken)
     {

@@ -4,4 +4,4 @@ using Shared.Responses;
 
 namespace Products.Application.Commands.Car;
 
-public record DeleteCarCommand(int? Id) : IRequest<BaseResponse<bool>>;
+public record DeleteCarCommand(int Id) : IRequest<BaseResponse<bool>>;
