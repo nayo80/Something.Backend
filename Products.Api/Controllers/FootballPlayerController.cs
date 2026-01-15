@@ -12,31 +12,31 @@ namespace Products.Api.Controllers;
 public class FootballPlayerController(IMediator mediator) : ControllerBase
 {
     [HttpPost]
-    public async Task<BaseResponse<int>> CreateCar([FromBody] RequestFootballPlayer carDto)
+    public async Task<BaseResponse<int>> CreatePlayer([FromBody] RequestFootballPlayer carDto)
     {
         return await mediator.Send(new CreatePlayerCommand(carDto));
     }
     
     [HttpPut("{id:int}")]
-    public async Task<BaseResponse<bool>> UpdateCar( int id,[FromBody] RequestFootballPlayer carDto)
+    public async Task<BaseResponse<bool>> UpdatePlayer( int id,[FromBody] RequestFootballPlayer carDto)
     {
         return await mediator.Send(new UpdatePlayerCommand(id,carDto));
     }
     
     [HttpDelete("{id:int}")]
-    public async Task<BaseResponse<bool>> DeleteCar( int id)
+    public async Task<BaseResponse<bool>> DeletePlayer( int id)
     {
         return await mediator.Send(new DeletePlayerCommand(id));
     }
     
     [HttpGet("{id:int}")]
-    public async Task<BaseResponse<FootballPlayerModel>> SingleCar( int id)
+    public async Task<BaseResponse<FootballPlayerModel>> SinglePlayer( int id)
     {
         return await mediator.Send(new SinglePlayerQuery(id));
     }
     
     [HttpGet]
-    public async Task<BaseResponse<IEnumerable<FootballPlayerModel>?>> AllCar()
+    public async Task<BaseResponse<IEnumerable<FootballPlayerModel>?>> AllPlayer()
     {
         return await mediator.Send(new AllPlayerQuery());
     }
