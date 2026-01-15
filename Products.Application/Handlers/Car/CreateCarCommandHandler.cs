@@ -9,7 +9,7 @@ using Shared.Responses;
 
 namespace Products.Application.Handlers.Car;
 
-public class CreateCarCommandHandler(ICarRepository repository,IMapper mapper,IElasticEngineService elasticServices) : IRequestHandler<CreateCarCommand,BaseResponse<int>>
+public class CreateCarCommandHandler(IGenericRepository<CarModel> repository,IMapper mapper,IElasticEngineService elasticServices) : IRequestHandler<CreateCarCommand,BaseResponse<int>>
 {
     public async Task<BaseResponse<int>> Handle(CreateCarCommand request, CancellationToken cancellationToken)
     {

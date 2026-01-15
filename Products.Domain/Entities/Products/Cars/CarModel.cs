@@ -1,8 +1,8 @@
-﻿using Shared.Dto;
+﻿using Shared.DTO;
 
 namespace Products.Domain.Entities.Products.Cars;
 
-public record CarModel : BaseEntity
+public class CarModel : BaseModel
 {
     public string Brand { get; set; } = string.Empty;
     public string Model { get; set; } = string.Empty;

@@ -7,7 +7,7 @@ using Shared.Responses;
 
 namespace Products.Application.Handlers.Car;
 
-public class AllCarQueryHandler(ICarRepository repository) : IRequestHandler<AllCarQuery,BaseResponse<IEnumerable<CarModel>?>>
+public class AllCarQueryHandler(IGenericRepository<CarModel> repository) : IRequestHandler<AllCarQuery,BaseResponse<IEnumerable<CarModel>?>>
 {
     public async Task<BaseResponse<IEnumerable<CarModel>?>> Handle(AllCarQuery request, CancellationToken cancellationToken)
     {

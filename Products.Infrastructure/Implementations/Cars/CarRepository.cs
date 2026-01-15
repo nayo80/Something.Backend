@@ -6,14 +6,14 @@ using Shared.Exceptions;
 
 namespace Products.Infrastructure.Implementations.Cars;
 
-public class CarRepository(IDbConnection connection) : ICarRepository
+public class CarRepository(IDbConnection connection) : IGenericRepository<CarModel>
 {
-    public async Task<int> CreateAsync(CarModel carModel)
+    public async Task<int> CreateAsync(CarModel carModel) 
     {
         return await connection.ExecuteScalarAsync<int>("dbo.CreateCar", new
         {
-            carModel.Brand,
             carModel.Model,
+            carModel.Brand,
             carModel.ReleaseDate,
         }, commandType: CommandType.StoredProcedure);
     }
@@ -27,6 +27,12 @@ public class CarRepository(IDbConnection connection) : ICarRepository
             carModel?.Model,
             carModel?.ReleaseDate,
         }, commandType: CommandType.StoredProcedure);
+    }
+
+
+    public Task<int> CreateAsync<T>(T carModel)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task<bool> DeleteAsync(int? id)
@@ -44,6 +50,7 @@ public class CarRepository(IDbConnection connection) : ICarRepository
         if (carModel == null) throw new UserFriendlyException(ErrorMessages.CarNotFound);
         return carModel;
     }
+
 
     public async Task<IEnumerable<CarModel>?> ReadAllAsync()
     {

@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Products.Application.Commands.Car;
 using Products.Application.Validators.Car;
+using Products.Domain.Entities.Products.Cars;
 using Products.Infrastructure.Implementations.Cars;
 using Products.Infrastructure.Interfaces.Cars;
 using Serilog;
@@ -103,7 +104,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CarValidator>();
 builder.Services.AddMapster();
-builder.Services.AddScoped<ICarRepository, CarRepository>();
+builder.Services.AddScoped<IGenericRepository<CarModel>, CarRepository>();
 builder.Services.AddSingleton<IElasticEngineService,ElasticEngineService>();
 
 #endregion
