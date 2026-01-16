@@ -59,7 +59,7 @@ builder.Services.AddSwaggerGen(options =>
 #endregion
 
 #region ElasticLogs
-
+builder.Services.AddSingleton<IElasticEngineService,ElasticEngineService>();
 builder.Services.AddElasticSerilog(builder.Configuration);
 builder.Host.UseSerilog();
 
@@ -108,7 +108,6 @@ builder.Services.AddValidatorsFromAssemblyContaining<CarValidator>();
 builder.Services.AddMapster();
 builder.Services.AddScoped<IGenericRepository<CarModel>, CarRepository>();
 builder.Services.AddScoped<IGenericRepository<FootballPlayerModel>, FootballPlayerRepository>();
-builder.Services.AddSingleton<IElasticEngineService,ElasticEngineService>();
 
 #endregion
 
