@@ -16,9 +16,4 @@ public class AuthHelper(IHttpContextAccessor httpContextAccessor)
             return -1;
         return userId;
     }
-
-    public static string? GetUserFullName(ClaimsPrincipal user)
-    {
-        return user.Claims.FirstOrDefault(c => c.Type == "Name")?.Value;
-    }
 }

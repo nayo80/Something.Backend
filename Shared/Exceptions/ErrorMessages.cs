@@ -14,17 +14,9 @@ public enum ErrorMessages
     AuthRefreshTokenInvalid,
     UserIsDeleted,
     AuthPermitUserIsDeleted,
-    ExpressionOfInterestFailed,
-    ConfirmationFailed,
     AuthorizationFailedCheckCredentials,
     #endregion
     
-    #region RestaurantNotFound
-
-    RestaurantNotFound,
-    DescriptionShouldBeTranslated,
-
-    #endregion
 
     #region Role Errors
 
@@ -45,32 +37,7 @@ public enum ErrorMessages
     #endregion
 
     #region Password Errors
-
     InvalidPassword,
-    PasswordsNotMatches,
-
-    #endregion
-    
-    #region WorkingHours
-
-    RestaurantWorkingHoursFromHasInvalidFormat,
-    RestaurantWorkingHoursToHasInvalidFormat,
-    KitchenWorkingHoursFromHasInvalidFormat,
-    KitchenWorkingHoursToHasInvalidFormat,
-    WorkingHoursFromCannotBeGreaterThanWorkingHoursTo,
-
-    #endregion
-
-    
-    
-    
-    #region UploadImage Error
-
-    WrongImageExtension,
-    ImageSizeIsMoreThan5Mb,
-    ImageNotUploaded,
-    InvalidImageDirectory,
-    ImageNotFound,
     #endregion
 
 }

@@ -6,4 +6,5 @@ public interface IElasticEngineService
     Task IndexProductAsync<T>(T product);
     Task UpdateProductAsync<T>(int id, T updatedProduct) where T : class;
     Task DeleteProductAsync(int id);
+    Task<IEnumerable<T>?> GetAllProductsAsync<T>() where T : class;
 }

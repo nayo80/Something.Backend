@@ -7,10 +7,10 @@ public class EmailSender : IEmailSender
 {
     public async Task SendResetLinkAsync(string toEmail, string resetUrl)
     {
-        var apiKey = "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";
+        var apiKey = "your-api-key";
         var client = new SendGridClient(apiKey);
 
-        var from = new EmailAddress("nakopia8080@gmail.com", "Auth.Template");
+        var from = new EmailAddress("FromUser@gmail.com", "Auth.Template");
         var subject = "Reset Your Password";
         var to = new EmailAddress(toEmail);
 
