@@ -86,4 +86,23 @@ public class ElasticEngineService : IElasticEngineService
             _logger.LogInformation("Product with ID {Id} successfully deleted", id);
         }
     }
+    
+    public async Task<IEnumerable<T>?> GetAllProductsAsync<T>() where T : class
+    {
+        var response = await _client.SearchAsync<T>(s => s
+                .Index(_defaultIndex)
+                .From(1)  
+                .Size(100)    
+                .Query(q => q.MatchAll()) 
+        );
+
+        if (!response.IsValidResponse)
+        {
+            _logger.LogError("Failed to retrieve all products: {Message}", response.DebugInformation);
+            return Enumerable.Empty<T>();
+        }
+
+        _logger.LogInformation("Successfully retrieved {Count} documents", response.Documents.Count);
+        return response.Documents;
+    }
 }

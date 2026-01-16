@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Products.Application.Commands.Car;
 using Products.Application.Commands.FootballPlayer;
 using Products.Domain.Entities.FootballPlayers;
 using Products.Infrastructure.Interface;

@@ -49,7 +49,7 @@ public class FootballPlayerRepository(IDbConnection connection) : IGenericReposi
     {
         var playerModel = await connection.QueryAsync<FootballPlayerModel>("dbo.AllPlayers",
             commandType: CommandType.StoredProcedure);
-        if (playerModel == null) throw new UserFriendlyException(ErrorMessages.CarNotFound);
+        if (playerModel == null) throw new UserFriendlyException(ErrorMessages.PlayerNotFound);
         return playerModel;
     }
 }

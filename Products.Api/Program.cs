@@ -17,6 +17,7 @@ using Products.Infrastructure.Implementations.FootballPlayers;
 using Products.Infrastructure.Interface;
 using Serilog;
 using Services.ElasticSearch;
+using Services.Redis;
 using Shared.Helpers.ElasticSearchLogs;
 using Shared.Middlewares;
 
@@ -65,8 +66,17 @@ builder.Host.UseSerilog();
 
 #endregion
 
+#region Redis
+
+builder.Services.AddRedisCache(builder.Configuration.GetConnectionString("Redis")!);
+
+#endregion
+
+#region MsSql
+
 builder.Services.AddScoped<IDbConnection>(_ =>
     new SqlConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
+#endregion
 
 #region Authentication & Authorization
 
