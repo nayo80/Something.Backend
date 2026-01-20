@@ -1,7 +1,8 @@
-﻿namespace Products.Application.Dtos.Cars;
+﻿namespace Shared.Events;
 
-public record RequestCarDto
+public class CarEventModel
 {
+    public int CarId { get; set; }
     public string Brand { get; set; } = string.Empty;
     public string Model { get; set; } = string.Empty;
     public DateTime ReleaseDate { get; set; }

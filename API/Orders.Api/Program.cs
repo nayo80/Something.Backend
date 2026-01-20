@@ -1,28 +1,15 @@
 using System.Data;
 using System.Text;
-using FluentValidation;
-using FluentValidation.AspNetCore;
-using Mapster;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Orders.Infrastructure.Consumer;
 using Orders.Infrastructure.Implementations;
 using Orders.Infrastructure.Interfaces;
-using Products.Application.Commands.Car;
-using Products.Application.Validators.Car;
-using Products.Domain.Entities.Cars;
-using Products.Domain.Entities.FootballPlayers;
-using Products.Infrastructure.Implementations.Cars;
-using Products.Infrastructure.Implementations.FootballPlayers;
-using Products.Infrastructure.Interface;
-using Serilog;
-using Services.ElasticSearch;
 using Services.Rabbit;
-using Services.Redis;
 using Shared.Events;
-using Shared.Helpers.ElasticSearchLogs;
 using Shared.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,9 +18,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-
-// Products.Api/Program.cs
-builder.Services.AddRabbitMqService();
 
 #region Swagger
 
@@ -63,19 +47,6 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
-
-#endregion
-
-#region ElasticLogs
-builder.Services.AddSingleton<IElasticEngineService,ElasticEngineService>();
-builder.Services.AddElasticSerilog(builder.Configuration);
-builder.Host.UseSerilog();
-
-#endregion
-
-#region Redis
-
-builder.Services.AddRedisCache(builder.Configuration.GetConnectionString("Redis")!);
 
 #endregion
 
@@ -115,27 +86,23 @@ builder.Services.AddAuthentication(options =>
     .AddCookie();
 
 builder.Services.AddAuthorization();
-
-#endregion
-
-#region Services
-
-builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddValidatorsFromAssemblyContaining<CarValidator>();
-builder.Services.AddMapster();
-builder.Services.AddScoped<IGenericRepository<CarModel>, CarRepository>();
 builder.Services.AddScoped<IListenEventRepository<CarEventModel>,ListenEventRepository>();
-builder.Services.AddScoped<IGenericRepository<FootballPlayerModel>, FootballPlayerRepository>();
-
 #endregion
 
 #region Mediatr
 
-builder.Services.AddMediatR(m => m.RegisterServicesFromAssemblies(
-    typeof(CreateCarCommand).Assembly
-));
+// builder.Services.AddMediatR(m => m.RegisterServicesFromAssemblies(
+//     typeof(CreateCarCommand).Assembly
+// ));
 
 #endregion
+
+// Orders პროექტის Program.cs-ში
+builder.Services.AddRabbitMqService(x => 
+{
+    x.AddConsumer<CarCreatedConsumer>();
+});
+
 
 var app = builder.Build();
 
@@ -153,3 +120,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
