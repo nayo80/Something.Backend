@@ -15,6 +15,7 @@ public class CarRepository(IDbConnection connection) : IGenericRepository<CarMod
             carModel.Model,
             carModel.Brand,
             carModel.ReleaseDate,
+            carModel.Price
         }, commandType: CommandType.StoredProcedure);
     }
 
