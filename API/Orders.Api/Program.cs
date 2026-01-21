@@ -89,15 +89,8 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<IListenEventRepository<CarEventModel>,ListenEventRepository>();
 #endregion
 
-#region Mediatr
 
-// builder.Services.AddMediatR(m => m.RegisterServicesFromAssemblies(
-//     typeof(CreateCarCommand).Assembly
-// ));
 
-#endregion
-
-// Orders პროექტის Program.cs-ში
 builder.Services.AddRabbitMqService(x => 
 {
     x.AddConsumer<CarCreatedConsumer>();

@@ -30,7 +30,7 @@ public class EmailSender : IEmailSender
                     </a>
                 </p>
                 <p>If you didn’t request this, you can ignore this email.</p>
-                <p>– The ReservoApp Team</p>
+                <p>– The SomethingApp Team</p>
             </body>
         </html>";
 

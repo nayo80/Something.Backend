@@ -32,8 +32,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-// Products.Api/Program.cs
-builder.Services.AddRabbitMqService();
+
 
 #region Swagger
 
@@ -66,7 +65,7 @@ builder.Services.AddSwaggerGen(options =>
 
 #endregion
 
-#region ElasticLogs
+#region Elastic
 builder.Services.AddSingleton<IElasticEngineService,ElasticEngineService>();
 builder.Services.AddElasticSerilog(builder.Configuration);
 builder.Host.UseSerilog();
@@ -76,6 +75,12 @@ builder.Host.UseSerilog();
 #region Redis
 
 builder.Services.AddRedisCache(builder.Configuration.GetConnectionString("Redis")!);
+
+#endregion
+
+#region rabbit
+
+builder.Services.AddRabbitMqService();
 
 #endregion
 

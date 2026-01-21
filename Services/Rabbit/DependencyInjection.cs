@@ -6,12 +6,11 @@ namespace Services.Rabbit;
 public static class DependencyInjection
 {
     public static IServiceCollection AddRabbitMqService(this IServiceCollection services,
-        Action<IBusRegistrationConfigurator>? configureConsumers = null)
+        Action<IBusRegistrationConfigurator>? configureBus = null)
     {
         services.AddMassTransit(x =>
         {
-            // აქ ვაძლევთ საშუალებას Orders სერვისს, რომ თავისი Consumer-ები დაარეგისტრიროს
-            configureConsumers?.Invoke(x);
+            configureBus?.Invoke(x);
 
             x.UsingRabbitMq((context, cfg) =>
             {

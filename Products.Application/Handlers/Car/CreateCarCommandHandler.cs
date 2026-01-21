@@ -27,11 +27,14 @@ public class CreateCarCommandHandler(
         await elasticServices.IndexProductAsync(mappedCar);
         await publishEndpoint.Publish(new CarEventModel
         {
-            CarId = mappedCar.Id,
+            CarId = resultFromServer,
             Brand = mappedCar.Brand,
             Model = mappedCar.Model,
             Price = mappedCar.Price,
             ReleaseDate = mappedCar.ReleaseDate
+        }, context => 
+        {
+            context.SetRoutingKey("CarCreated");
         }, cancellationToken);
 
         return new BaseResponse<int>
