@@ -15,6 +15,7 @@ public class EmailSender : IEmailSender
         var to = new EmailAddress(toEmail);
 
         var plainTextContent = $"Click the following link to reset your password: {resetUrl}";
+        // ეს არ ჩატოვო აქ, ბაზაში გაიტანე ან ფაილში მაინც
         var htmlContent = $@"
         <html>
             <body style='font-family: Arial, sans-serif;'>

@@ -42,6 +42,7 @@ public class AuthRepository(IDbConnection connection) : IAuthRepository
 
     public async Task<User?> GetUserById(int userId)
     {
+        // query multiple რად გინდა თუ 1 სელექტი გაქ მაინც
         var grid = await connection.QueryMultipleAsync("[dbo].[GetUserById]", new
         {
             Id = userId

@@ -2,6 +2,7 @@
 
 namespace Authorization.Domain.Dto;
 
+// domain ში dto - ს რა უნდა
 public record UserWithRoleDto : BaseDto
 {
     public string Username { get; init; } = string.Empty;

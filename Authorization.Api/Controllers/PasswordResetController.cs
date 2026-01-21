@@ -9,6 +9,7 @@ namespace Authorization.Api.Controllers;
 [Route("api/[controller]")]
 public class PasswordResetController(IMediator mediator) : ControllerBase
 {
+    // სახელი ნორმალურად დაარქვი :D ResetPassword ან რამე ეგეთი
     [HttpPost("forgot")]
     public async Task<IActionResult> Forgot(string? email)
     {

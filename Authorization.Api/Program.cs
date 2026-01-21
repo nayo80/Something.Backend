@@ -54,10 +54,15 @@ builder.Services.AddSwaggerGen(options =>
 #endregion
 builder.Services.AddMapster();
 
-builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssemblies(
-        typeof(SignInQueryHandler).Assembly,
-        typeof(AddRoleCommandHandler).Assembly));
+// ასე არ გჭირდება
+// builder.Services.AddMediatR(cfg =>
+//     cfg.RegisterServicesFromAssemblies(
+//         typeof(SignInQueryHandler).Assembly,
+//         typeof(AddRoleCommandHandler).Assembly));
+
+// ესეც ყოფნის, ერთ assembly - შია ორივე
+builder.Services.AddMediatR(cfg => 
+    cfg.RegisterServicesFromAssembly(typeof(SignInQueryHandler).Assembly));
 
 builder.Services.AddHttpContextAccessor();
 
@@ -80,6 +85,7 @@ builder.Services.AddSingleton<TokenService>();
 
 #region Authentication & Authorization
 
+// არ ვარგა, გასაღების ჩექი დაამატე და თუ ვერ ნახა exception ისროლე
 var keyString = builder.Configuration["Jwt:Key"]
                 ?? "biUULD2I21BaOLdq3TOdifhjyWcIYpWKScEruuvkA5HtRw3Lrk7W2xShdsasdudtem";
 

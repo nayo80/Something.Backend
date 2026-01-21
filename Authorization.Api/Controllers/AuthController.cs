@@ -15,6 +15,7 @@ public class AuthController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> SignIn(string email, string password)
     {
         var token = await mediator.Send(request: new SignInQuery(Email: email, Password: password));
+        // unused variable
         var date = DateTime.UtcNow;
         // if (!string.IsNullOrEmpty(token.Token))
         // {
@@ -37,6 +38,7 @@ public class AuthController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("users/{page:int}/{amount:int}")]
+    // ამდენი პარამეტრი როცა გაქ კლასზე დამაპო ჯობია პირდაპირ
     public async Task<IActionResult> GetAllUsersWithRoles(int page, int amount, string? name, string? username,
         DateTime? fromDate, DateTime? toDate, int? roleId, int? groupId, bool? status)
     {

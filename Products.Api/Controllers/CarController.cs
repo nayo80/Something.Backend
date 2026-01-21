@@ -35,6 +35,7 @@ public class CarController(IMediator mediator) : ControllerBase
         return await mediator.Send(new SingleCarQuery(id));
     }
     
+    // სახელი დაარქვი წესიერი
     [HttpGet]
     public async Task<BaseResponse<IEnumerable<CarModel>?>> AllCar()
     {

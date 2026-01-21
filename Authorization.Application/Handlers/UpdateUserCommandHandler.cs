@@ -10,9 +10,10 @@ namespace Authorization.Application.Handlers;
 public class UpdateUserCommandHandler(
     IAuthRepository authRepository,
     IMapper mapper)
-    : IRequestHandler<UpdateUserCommand, Unit>
+    : IRequestHandler<UpdateUserCommand>
 {
-    public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+    // ეს ესეც შეგიძლია, არაა Unit აუცილებელი
+    public async Task Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
         var existingUser = await authRepository.GetUserById(request.User.Id);
         if (existingUser == null) throw new UserFriendlyException(ErrorMessages.UserNotFound);
@@ -29,7 +30,5 @@ public class UpdateUserCommandHandler(
         var mappedUser = mapper.Map<User>(updatedUser);
 
         await authRepository.UpdateUser(mappedUser);
-
-        return Unit.Value;
     }
 }

@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Authorization.Application.Commands;
 
-public record UpdateUserCommand(UpdateUserDto User) : IRequest<Unit>;
+public record UpdateUserCommand(UpdateUserDto User) : IRequest;
