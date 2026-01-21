@@ -13,17 +13,17 @@ public class SignInQueryHandler(
 {
     public async Task<SignInDto> Handle(SignInQuery request, CancellationToken cancellationToken)
     {
-        var userAndRestaurant = await authRepository.GetUser(request.Email);
-        if (userAndRestaurant.IsDeleted) throw new UserFriendlyException(ErrorMessages.AuthPermitUserIsDeleted);
-        var isOkay = PasswordService.VerifyPassword(request.Password, userAndRestaurant.Password);
+        var user = await authRepository.GetUser(request.Email);
+        if (user.IsDeleted) throw new UserFriendlyException(ErrorMessages.AuthPermitUserIsDeleted);
+        var isOkay = PasswordService.VerifyPassword(request.Password, user.Password);
 
         if (!isOkay) throw new UserFriendlyException(ErrorMessages.AuthNotPermitted);
 
         
-        var token = tokenService.GenerateJwtToken(userAndRestaurant);
+        var token = tokenService.GenerateJwtToken(user);
         var refreshToken = TokenService.GenerateRefreshToken();
 
-        await authRepository.SaveRefreshToken(userAndRestaurant.Id, token, refreshToken);
+        await authRepository.SaveRefreshToken(user.Id, token, refreshToken);
 
         return new SignInDto
         {

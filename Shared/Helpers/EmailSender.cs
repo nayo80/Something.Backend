@@ -29,13 +29,13 @@ public class EmailSender : IEmailSender
                         Reset Password
                     </a>
                 </p>
-                <p>If you didn’t request this, you can ignore this email.</p>
+                <p>If you did not request this, you can ignore this email.</p>
                 <p>– The SomethingApp Team</p>
             </body>
         </html>";
 
         var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-        var response = await client.SendEmailAsync(msg);
+        await client.SendEmailAsync(msg);
     }
 
 }

@@ -10,13 +10,13 @@ namespace Authorization.Application.Handlers;
 public class UpdateUserCommandHandler(
     IAuthRepository authRepository,
     IMapper mapper)
-    : IRequestHandler<UpdateUserCommand, Unit>
+    : IRequestHandler<UpdateUserCommand>
 {
-    public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
         var existingUser = await authRepository.GetUserById(request.User.Id);
         if (existingUser == null) throw new UserFriendlyException(ErrorMessages.UserNotFound);
-        if (existingUser.IsDeleted == true) throw new UserFriendlyException(ErrorMessages.UserIsDeleted);
+        if (existingUser.IsDeleted) throw new UserFriendlyException(ErrorMessages.UserIsDeleted);
         
         var updatedUser = existingUser with
         {
@@ -29,7 +29,5 @@ public class UpdateUserCommandHandler(
         var mappedUser = mapper.Map<User>(updatedUser);
 
         await authRepository.UpdateUser(mappedUser);
-
-        return Unit.Value;
     }
 }

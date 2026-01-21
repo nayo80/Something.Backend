@@ -15,12 +15,6 @@ public class AuthController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> SignIn(string email, string password)
     {
         var token = await mediator.Send(request: new SignInQuery(Email: email, Password: password));
-        var date = DateTime.UtcNow;
-        // if (!string.IsNullOrEmpty(token.Token))
-        // {
-        //     logger.LogInformation($"User {email} successfully logged in at {date}.");
-        // }
-        
         return new JsonResult(value: token);
     }
 
@@ -36,15 +30,6 @@ public class AuthController(IMediator mediator) : ControllerBase
         return new JsonResult(newToken);
     }
 
-    [HttpGet("users/{page:int}/{amount:int}")]
-    public async Task<IActionResult> GetAllUsersWithRoles(int page, int amount, string? name, string? username,
-        DateTime? fromDate, DateTime? toDate, int? roleId, int? groupId, bool? status)
-    {
-        var resp = await mediator.Send(
-            new GetAllUsersWithRolesQuery(page, amount, name, username, fromDate, toDate, roleId, groupId, status));
-
-        return new JsonResult(resp);
-    }
 
     [HttpPost]
     public async Task<IActionResult> SignUp([FromBody] SignUpDto user)

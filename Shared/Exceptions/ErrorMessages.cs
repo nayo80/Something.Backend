@@ -39,5 +39,7 @@ public enum ErrorMessages
     #region Password Errors
     InvalidPassword,
     #endregion
+    
+    JwtKeyNotFound,
 
 }

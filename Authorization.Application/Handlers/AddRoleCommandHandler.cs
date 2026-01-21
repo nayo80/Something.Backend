@@ -20,6 +20,6 @@ public class AddRoleCommandHandler(IRoleRepository roleRepository, IMapper mappe
         
         var domainModel = mapper.Map<Role>(request.RequestRoleDto);
 
-        return await roleRepository.Create(domainModel, authHelper.GetUserId());
+        return await roleRepository.Create(domainModel, authHelper.UserId);
     }
 }

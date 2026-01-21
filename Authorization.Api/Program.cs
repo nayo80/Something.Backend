@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Shared.Exceptions;
 // using Serilog;
 using Shared.Helpers;
 using Shared.Middlewares;
@@ -56,8 +57,7 @@ builder.Services.AddMapster();
 
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssemblies(
-        typeof(SignInQueryHandler).Assembly,
-        typeof(AddRoleCommandHandler).Assembly));
+        typeof(SignInQueryHandler).Assembly));
 
 builder.Services.AddHttpContextAccessor();
 
@@ -80,8 +80,8 @@ builder.Services.AddSingleton<TokenService>();
 
 #region Authentication & Authorization
 
-var keyString = builder.Configuration["Jwt:Key"]
-                ?? "biUULD2I21BaOLdq3TOdifhjyWcIYpWKScEruuvkA5HtRw3Lrk7W2xShdsasdudtem";
+var keyString = builder.Configuration["Jwt:Key"]?? throw new UserFriendlyException(ErrorMessages.JwtKeyNotFound);
+
 
 var key = Encoding.ASCII.GetBytes(keyString);
 

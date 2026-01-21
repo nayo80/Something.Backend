@@ -10,6 +10,7 @@ using Orders.Infrastructure.Implementations;
 using Orders.Infrastructure.Interfaces;
 using Services.Rabbit;
 using Shared.Events;
+using Shared.Exceptions;
 using Shared.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,10 +59,10 @@ builder.Services.AddScoped<IDbConnection>(_ =>
 
 #region Authentication & Authorization
 
-var keyString = builder.Configuration["Jwt:Key"];
-// ?? "biUULD2I21BaOLdq3TOdifhjyWcIYpWKScEruuvkA5HtRw3Lrk7W2xShdsasdudtem";
+var keyString = builder.Configuration["Jwt:Key"]?? throw new UserFriendlyException(ErrorMessages.JwtKeyNotFound);
 
-var key = Encoding.ASCII.GetBytes(keyString!);
+
+var key = Encoding.ASCII.GetBytes(keyString);
 
 builder.Services.AddAuthentication(options =>
     {

@@ -1,6 +1,5 @@
 using System.Data;
 using Authorization.Domain.DbModels;
-using Authorization.Domain.Dto;
 using Dapper;
 using Shared.Exceptions;
 
@@ -42,12 +41,10 @@ public class AuthRepository(IDbConnection connection) : IAuthRepository
 
     public async Task<User?> GetUserById(int userId)
     {
-        var grid = await connection.QueryMultipleAsync("[dbo].[GetUserById]", new
+        var user = await connection.QuerySingleOrDefaultAsync("[dbo].[GetUserById]", new
         {
             Id = userId
         }, commandType: CommandType.StoredProcedure);
-
-        var user = await grid.ReadSingleOrDefaultAsync<User>();
 
         if (user == null) throw new UserFriendlyException(ErrorMessages.AuthNotPermitted);
 
@@ -88,20 +85,6 @@ public class AuthRepository(IDbConnection connection) : IAuthRepository
         }, commandType: CommandType.StoredProcedure);
     }
 
-    #region Helpers
-
-    private static DataTable CreateTagTable(IEnumerable<int> tagIds)
-    {
-        var table = new DataTable();
-        table.Columns.Add("TagId", typeof(int));
-
-        foreach (var id in tagIds)
-            table.Rows.Add(id);
-
-        return table;
-    }
-
-    #endregion
     public async Task DeleteUser(int userId)
     {
         await connection.ExecuteAsync("[dbo].[DeleteUser]", new
@@ -109,24 +92,6 @@ public class AuthRepository(IDbConnection connection) : IAuthRepository
             Id = userId
         }, commandType: CommandType.StoredProcedure);
     }
-
-    public async Task<IEnumerable<UserWithRoleDto>> GetAllUsersWithRoles(int page, int amount, string? name,
-        string? username, DateTime? fromDate, DateTime? toDate, int? roleId, int? groupId, bool? status)
-    {
-        return await connection.QueryAsync<UserWithRoleDto>("[dbo].[SP_GetAllUsersWithRoles]", new
-        {
-            Page = page,
-            Amount = amount,
-            Name = name,
-            Username = username,
-            FromDate = fromDate,
-            ToDate = toDate,
-            RoleId = roleId,
-            GroupId = groupId,
-            Status = status
-        }, commandType: CommandType.StoredProcedure);
-    }
-
 
     public async Task SaveRefreshToken(int userId, string token, string refreshToken)
     {

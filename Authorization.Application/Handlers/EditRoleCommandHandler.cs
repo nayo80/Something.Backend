@@ -3,7 +3,6 @@ using Authorization.Domain.DbModels;
 using Authorization.Infrastructure.Interfaces;
 using MapsterMapper;
 using MediatR;
-using Shared.Helpers;
 
 namespace Authorization.Application.Handlers;
 

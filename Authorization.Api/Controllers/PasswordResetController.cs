@@ -9,8 +9,8 @@ namespace Authorization.Api.Controllers;
 [Route("api/[controller]")]
 public class PasswordResetController(IMediator mediator) : ControllerBase
 {
-    [HttpPost("forgot")]
-    public async Task<IActionResult> Forgot(string? email)
+    [HttpPost("ResetLink")]
+    public async Task<IActionResult> ResetLink(string? email)
     {
         await mediator.Send(new SendUrlToMailCommand(email));
         return Ok(new { message = "Reset link has been sent." });

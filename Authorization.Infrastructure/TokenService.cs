@@ -26,20 +26,16 @@ public class TokenService
         _tokenHandler = new JwtSecurityTokenHandler();
     }
 
-    public string GenerateJwtToken(User userAndRestaurant)
+    public string GenerateJwtToken(User user)
     {
-        List<Claim> claims;
-
-
-        claims = new List<Claim>
-        {
-            new(ClaimTypes.NameIdentifier, userAndRestaurant.Id.ToString()),
+        List<Claim> claims = [
+            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new("Name", $"{userAndRestaurant.FirstName} {userAndRestaurant.LastName}"),
-            new("RoleId", userAndRestaurant.RoleId.ToString()),
-            new("Email", userAndRestaurant.Email),
-            new("PhoneNumber", userAndRestaurant.PhoneNumber ?? string.Empty)
-        };
+            new("Name", $"{user.FirstName} {user.LastName}"),
+            new("RoleId", user.RoleId.ToString()),
+            new("Email", user.Email),
+            new("PhoneNumber", user.PhoneNumber)
+        ];
 
         var token = new JwtSecurityToken(
             _issuer,

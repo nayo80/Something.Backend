@@ -22,6 +22,7 @@ using Services.ElasticSearch;
 using Services.Rabbit;
 using Services.Redis;
 using Shared.Events;
+using Shared.Exceptions;
 using Shared.Helpers.ElasticSearchLogs;
 using Shared.Middlewares;
 
@@ -92,8 +93,7 @@ builder.Services.AddScoped<IDbConnection>(_ =>
 
 #region Authentication & Authorization
 
-var keyString = builder.Configuration["Jwt:Key"];
-// ?? "biUULD2I21BaOLdq3TOdifhjyWcIYpWKScEruuvkA5HtRw3Lrk7W2xShdsasdudtem";
+var keyString = builder.Configuration["Jwt:Key"]?? throw new UserFriendlyException(ErrorMessages.JwtKeyNotFound);
 
 var key = Encoding.ASCII.GetBytes(keyString!);
 

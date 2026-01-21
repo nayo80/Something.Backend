@@ -7,7 +7,7 @@ public class AuthHelper(IHttpContextAccessor httpContextAccessor)
 {
     public int UserId => GetUserId();
     
-    public int GetUserId()
+    private int GetUserId()
     {
         var httpContext = httpContextAccessor.HttpContext;
         if (httpContext == null) return -1; 
