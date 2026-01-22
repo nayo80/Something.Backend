@@ -1,0 +1,60 @@
+﻿version: '3.8'
+
+services:
+  authorization-api:
+    build:
+      context: .
+      dockerfile: Authorization.Api/Dockerfile
+    container_name: auth-api
+    ports:
+      - "7089:7089"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    environment:
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_URLS=https://+:7089
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - elastic2
+    restart: always
+
+  products-api:
+    build:
+      context: .
+      dockerfile: Products.Api/Dockerfile
+    container_name: products-api
+    ports:
+      - "7066:7066"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    environment:
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_URLS=https://+:7066
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - elastic2
+    restart: always
+
+  orders-api:
+    build:
+      context: .
+      dockerfile: Orders.Api/Dockerfile
+    container_name: orders-api
+    ports:
+      - "7150:7150"  
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    environment:
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_URLS=https://+:7150
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - elastic2
+    restart: always
+
+networks:
+  elastic2:
+    external: true

@@ -1,0 +1,21 @@
+﻿name: Microservices Deployment
+
+on:
+  push:
+    branches: [ "main" ] 
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4 
+
+      - name: Build and Restart Containers
+        run: 
+          docker compose up -d --build
+
+      - name: Cleanup Old Images
+        run:
+          docker image prune -f
