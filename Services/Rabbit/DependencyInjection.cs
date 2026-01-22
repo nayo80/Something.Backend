@@ -10,11 +10,12 @@ public static class DependencyInjection
     {
         services.AddMassTransit(x =>
         {
+
             configureBus?.Invoke(x);
 
             x.UsingRabbitMq((context, cfg) =>
             {
-                cfg.Host("192.168.0.176", "/", h =>
+                cfg.Host("rabbitmq", "/", h =>
                 {
                     h.Username("guest");
                     h.Password("guest");

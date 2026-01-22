@@ -29,7 +29,6 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
     environment:
-      - MT_LICENSE=community
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
       - ASPNETCORE_Kestrel__Certificates__Default__Password=password
       - ASPNETCORE_URLS=https://+:7066
@@ -48,7 +47,6 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
     environment:
-      - MT_LICENSE=community
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
       - ASPNETCORE_Kestrel__Certificates__Default__Password=password
       - ASPNETCORE_URLS=https://+:7150
