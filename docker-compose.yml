@@ -16,7 +16,7 @@ services:
       - ASPNETCORE_URLS=https://+:7089
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
-      - elastic2
+      - niko_elastic2
     restart: always
 
   products-api:
@@ -34,7 +34,7 @@ services:
       - ASPNETCORE_URLS=https://+:7066
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
-      - elastic2
+      - niko_elastic2
     restart: always
 
   orders-api:
@@ -52,7 +52,7 @@ services:
       - ASPNETCORE_URLS=https://+:7150
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
-      - elastic2
+      - niko_elastic2
     restart: always
 
 networks:
