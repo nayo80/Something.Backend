@@ -11,8 +11,8 @@ COPY ["Products.Application/Products.Application.csproj", "Products.Application/
 COPY ["Products.Infrastructure/Products.Infrastructure.csproj", "Products.Infrastructure/"]
 COPY ["Products.Domain/Products.Domain.csproj", "Products.Domain/"]
 COPY ["Shared/Shared.csproj", "Shared/"]
-COPY ["API/Orders.Infrastructure/Orders.Infrastructure.csproj", "API/Orders.Infrastructure/"]
-COPY ["API/Orders.Domain/Orders.Domain.csproj", "API/Orders.Domain/"]
+COPY ["Orders.Domain/Orders.Domain.csproj", "Orders.Domain/"]
+COPY ["Orders.Infrastructure/Orders.Infrastructure.csproj", "Orders.Infrastructure/"]
 COPY ["Services/Services.csproj", "Services/"]
 RUN dotnet restore "Products.Api/Products.Api.csproj"
 COPY . .
