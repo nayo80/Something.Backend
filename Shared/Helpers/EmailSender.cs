@@ -35,7 +35,13 @@ public class EmailSender : IEmailSender
         </html>";
 
         var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-        await client.SendEmailAsync(msg);
+        var response = await client.SendEmailAsync(msg);
+        
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorBody = await response.Body.ReadAsStringAsync();
+            throw new Exception($"Failed to send email: {errorBody}");
+        }
     }
 
 }
