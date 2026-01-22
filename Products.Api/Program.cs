@@ -95,7 +95,7 @@ builder.Services.AddScoped<IDbConnection>(_ =>
 
 var keyString = builder.Configuration["Jwt:Key"]?? throw new UserFriendlyException(ErrorMessages.JwtKeyNotFound);
 
-var key = Encoding.ASCII.GetBytes(keyString!);
+var key = Encoding.ASCII.GetBytes(keyString);
 
 builder.Services.AddAuthentication(options =>
     {
