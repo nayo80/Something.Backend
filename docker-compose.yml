@@ -56,5 +56,5 @@ services:
     restart: always
 
 networks:
-  elastic2:
+  niko_elastic2:
     external: true
