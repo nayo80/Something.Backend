@@ -70,10 +70,7 @@ public partial class AuthHandlingMiddleware : IMiddleware
                         Endpoint = userPath,
                         context.Request.Method
                     });
-                
-                //temporary for hub
-                if(path.Contains("hubs"))
-                    userAllowed = true;
+
 
                 if (!userAllowed)
                     throw new UserFriendlyException(ErrorMessages.UserNotEnoughPermissions);
