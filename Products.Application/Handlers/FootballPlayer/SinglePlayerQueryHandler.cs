@@ -34,7 +34,7 @@ public class SinglePlayerQueryHandler(
 
         if (dbPlayer is not null)
         {
-            await cacheService.SetAsync(cacheKey, dbPlayer, cancellationToken: cancellationToken);
+            await cacheService.SetAsync(cacheKey, dbPlayer, expirationTime: null, cancellationToken: cancellationToken);
         }
 
         return new BaseResponse<FootballPlayerModel>

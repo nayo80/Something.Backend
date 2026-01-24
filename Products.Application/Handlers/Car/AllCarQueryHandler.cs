@@ -12,8 +12,6 @@ public class AllCarQueryHandler(IGenericRepository<CarModel> repository,IElastic
 {
     public async Task<BaseResponse<IEnumerable<CarModel>?>> Handle(AllCarQuery request, CancellationToken cancellationToken)
     {
-        var car = await repository.ReadAllAsync();
-        Guards.NotNull(car, nameof(car),"Cars not found");
         var elasticData = await elasticServices.GetAllProductsAsync<CarModel>();
         if (elasticData != null)
         {
@@ -22,6 +20,8 @@ public class AllCarQueryHandler(IGenericRepository<CarModel> repository,IElastic
                 Result = elasticData
             };
         }
+        var car = await repository.ReadAllAsync();
+        Guards.NotNull(car, nameof(car),"Cars not found");
         return new BaseResponse<IEnumerable<CarModel>?>()
         {
             Result = car
