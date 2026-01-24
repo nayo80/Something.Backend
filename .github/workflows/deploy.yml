@@ -10,7 +10,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4 
+        uses: actions/checkout@v4
+
+      - name: Stop and Remove Old Containers
+        run: docker compose down
 
       - name: Build and Restart Containers
         run: 
