@@ -26,10 +26,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost", policy =>
     {
-        policy.WithOrigins("http://localhost:3000") // აქ ჩასვი შენი ფრონტის URL
+        policy.WithOrigins("http://localhost:4200") 
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowCredentials(); // თუ cookie-ებს/ავტორიზაციას იყენებ
+            .AllowCredentials(); 
     });
 });
 // using var log = new LoggerConfiguration().WriteTo.Console().CreateLogger();
