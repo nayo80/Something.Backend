@@ -26,13 +26,15 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost", policy =>
     {
-        policy.WithOrigins("http://192.168.0.76:4200") 
+        policy.WithOrigins("http://localhost:4200",
+                "http://192.168.0.76:4200")
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowCredentials(); 
+            .AllowCredentials();
     });
 });
 // using var log = new LoggerConfiguration().WriteTo.Console().CreateLogger();
+
 #region Swagger
 
 builder.Services.AddSwaggerGen(options =>
@@ -61,7 +63,9 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+
 #endregion
+
 builder.Services.AddMapster();
 
 builder.Services.AddMediatR(cfg =>
@@ -89,7 +93,7 @@ builder.Services.AddSingleton<TokenService>();
 
 #region Authentication & Authorization
 
-var keyString = builder.Configuration["Jwt:Key"]?? throw new UserFriendlyException(ErrorMessages.JwtKeyNotFound);
+var keyString = builder.Configuration["Jwt:Key"] ?? throw new UserFriendlyException(ErrorMessages.JwtKeyNotFound);
 
 
 var key = Encoding.ASCII.GetBytes(keyString);
@@ -129,6 +133,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseCors("AllowLocalhost");
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseMiddleware<RequestLoggingMiddleware>();
@@ -137,4 +142,3 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
-
