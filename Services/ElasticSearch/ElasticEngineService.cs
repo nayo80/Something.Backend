@@ -19,6 +19,7 @@ public class ElasticEngineService : IElasticEngineService
         var uri = new Uri(settingsSection["Uri"] ?? string.Empty);
         var userName = settingsSection["UserName"] ?? string.Empty;
         var password = settingsSection["Password"] ?? string.Empty;
+        
         _defaultIndex = settingsSection["DefaultIndex"] ?? string.Empty;
 
         var settings = new ElasticsearchClientSettings(uri)

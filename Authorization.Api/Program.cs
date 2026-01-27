@@ -22,7 +22,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000") // აქ ჩასვი შენი ფრონტის URL
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials(); // თუ cookie-ებს/ავტორიზაციას იყენებ
+    });
+});
 // using var log = new LoggerConfiguration().WriteTo.Console().CreateLogger();
 #region Swagger
 
@@ -120,6 +129,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("AllowLocalhost");
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseHttpsRedirection();
